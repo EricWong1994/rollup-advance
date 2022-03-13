@@ -1,4 +1,5 @@
-// 搜 [todo]
+import babel from 'rollup-plugin-babel'
+
 export default {
     input: './src/main.js',
     output: {
@@ -9,6 +10,11 @@ export default {
     // global:{
     //     'jquery':'$' //告诉rollup 全局变量$即是jquery
     // },
+    plugins: [
+        babel({
+            exclude: 'node_modules/**'
+        })
+    ],
     external:['lodash'] //告诉rollup不要将此lodash打包，而作为外部依赖
 }
 
