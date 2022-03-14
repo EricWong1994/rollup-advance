@@ -1,19 +1,32 @@
 import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+// import typescript from '@rollup/plugin-typescript'
 
 export default {
-    input: './src/main.js',
+    // input: './src/main.js',
+    // input: './src/index.js',
+    input: ['./src/index.js'],
     output: {
         file: './dist/bundle.js',
-        format: 'cjs',
+        // format: 'cjs',
+        format: 'umd',
         name: 'bundleName'
     },
     // global:{
     //     'jquery':'$' //告诉rollup 全局变量$即是jquery
     // },
     plugins: [
+        resolve(),
+        // resolve({
+        //     jsnext: true,
+        //     main: true,
+        //     browser: true,
+        // }),
+        commonjs(),
         babel({
             exclude: 'node_modules/**'
-        })
+        }),
     ],
     external:['lodash'] //告诉rollup不要将此lodash打包，而作为外部依赖
 }
