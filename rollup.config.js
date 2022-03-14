@@ -1,6 +1,7 @@
-import babel from 'rollup-plugin-babel'
+// import babel from 'rollup-plugin-babel'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+// import commonjs from 'rollup/plugin-commonjs'
 // import typescript from '@rollup/plugin-typescript'
 
 export default {
@@ -9,26 +10,31 @@ export default {
     input: ['./src/index.js'],
     output: {
         file: './dist/bundle.js',
-        // format: 'cjs',
-        format: 'umd',
-        name: 'bundleName'
+        format: 'cjs',
+        // format: 'umd',
+        name: 'experience'
     },
     // global:{
     //     'jquery':'$' //告诉rollup 全局变量$即是jquery
     // },
     plugins: [
-        resolve(),
+        // resolve(),
         // resolve({
         //     jsnext: true,
         //     main: true,
         //     browser: true,
         // }),
-        commonjs(),
-        babel({
-            exclude: 'node_modules/**'
-        }),
+        commonjs()
+        // commonjs({
+        //     'my-lib': [ 'named' ]
+        // }),
+        // babel({
+        //     exclude: 'node_modules/**'
+        // }),
     ],
-    external:['lodash'] //告诉rollup不要将此lodash打包，而作为外部依赖
+    // external:['lodash'] //告诉rollup不要将此lodash打包，而作为外部依赖
+    // (!) Unresolved dependencies
+    // https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency (todo)
 }
 
 
