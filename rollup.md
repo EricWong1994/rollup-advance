@@ -20,11 +20,11 @@ Uncaught ReferenceError: require is not defined
 
 
 
-
-
 如我们所预料的，控制台输出了`柯森`。
 
 到这里，我们就用`rollup`打包了一个最最简单的`demo`。
+
+### 打包命令
 
 可能很多同学看到这里对于上面命令行中的参数不是很明白，我依次说明下：
 
@@ -47,3 +47,79 @@ rollup -c
 链接：https://juejin.cn/post/6869551115420041229
 来源：稀土掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+### 打包后文件格式
+
+**IIFE:** 适合部分场景作为SDK进行使用，尤其是需要把自己挂到 `window` 上的场景。
+
+**CommonJS:** 仅node.js使用的库。
+
+**AMD:** 只需要在浏览器端使用的场景。
+
+**UMD:** 既可能在浏览器端也可能在node.js里使用的场景。
+
+**SystemJs:** 和UMD类似。目前较出名的 `Angular` 用的就是它。
+
+**ESM:** 1. 还会被引用、二次编译的场景（如组件库等）；2.浏览器调试场景如 `vite.js`的开发时。3.对浏览器兼容性非常宽松的场景。
+
+
+作者：摸鱼的春哥
+链接：https://juejin.cn/post/7051236803344334862
+来源：稀土掘金
+
+
+
+## 插件
+
+### commonjs 插件
+
+有两个文件，分别是 `index.js` 和 `answer.js`。
+
+首先是 `index.js`：
+
+```js
+import answer from "./answer";
+
+export const printAnswer = () => {
+  // 打印
+  console.log(`the answer is ${answer}`)
+}
+```
+
+然后是 `answer.js`：
+
+```js
+module.exports = 42
+```
+
+以上代码逻辑很简单，但仔细看的话，也存在一些问题：`answer.js` 的导出模式 `module.exports` 是 `commonjs` 格式的。
+ 当我们使用没有插件的 `rollup` 进行打包时(执行命令 `yarn build-commonjs-no-plugin`)，控制台会直接报错：
+
+作者：摸鱼的春哥
+链接：https://juejin.cn/post/7069555431303020580
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+
+
+二、 node-resolve 插件
+
+三、babel 插件
+
+四、alias 插件
+
+五、beep 插件
+
+六、html 插件
+
+七、inject 插件
+
+八、multi-entry 插件
+
+九、replace 插件
+
+十、run 插件
+
+十一、strip 插件
